@@ -1,5 +1,5 @@
 export interface Test{
-    dificuldade: string
+    level: string
     numberOfQuestions: number
     questionList: Question[]
 }
@@ -16,3 +16,9 @@ export interface Option {
     wasSelect: boolean
     isCorrect: boolean
 }
+
+export type TestParams = {
+  tema: string;
+  numeroDePerguntas: number;
+  dificuldade: string;
+};
