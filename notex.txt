@@ -1,0 +1,80 @@
+npx create-next-app@latest testyouai-front --typescript
+
+npx create-next-app@latest . --typescript
+  cria na msm pasta
+
+    Explicação:
+    npx → executa o pacote sem instalar globalmente.
+
+    create-next-app@latest → ferramenta oficial para iniciar um projeto Next.js com a última versão.
+
+    testyouai-front → nome da pasta onde será criado o projeto.
+
+    --typescript → já configura o projeto com suporte a TypeScript.
+
+    💡 Resultado: cria uma estrutura completa com pastas como app/, public/, styles/ e arquivos tsconfig.json, next.config.js, entre outros.
+
+npm install -D tailwindcss postcss autoprefixer
+
+    Explicação:
+    npm install → instala pacotes via npm.
+
+    -D ou --save-dev → salva as dependências como "devDependencies" (usadas em tempo de desenvolvimento).
+
+    tailwindcss → o framework CSS que usaremos.
+
+    postcss → ferramenta para transformar CSS com plugins (Tailwind usa internamente).
+
+    autoprefixer → plugin do PostCSS que adiciona prefixos automaticamente para compatibilidade entre navegadores.
+
+npx tailwindcss init -p
+
+    Explicação:
+    npx tailwindcss init → cria o arquivo tailwind.config.js com configurações padrão.
+
+    -p → também cria o arquivo postcss.config.js junto.
+
+    💡 Resultado:
+
+    tailwind.config.js: onde você personaliza temas, cores, fontes, etc.
+
+    postcss.config.js: para o Tailwind funcionar com PostCSS.
+
+
+// tailwind.config.js
+module.exports = {
+  content: [
+    './app/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
+    Explicação:
+    content: define onde o Tailwind deve procurar pelas classes CSS. Ele faz isso escaneando os arquivos para gerar apenas os estilos usados no seu HTML/JSX.
+
+    './app/**/*.{js,ts,jsx,tsx}': escaneia todos os arquivos da pasta app/.
+
+    './components/**/*.{js,ts,jsx,tsx}': se você criar uma pasta components/, também será escaneada.
+
+/* app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+    Explicação:
+    Essas diretivas importam os blocos principais do Tailwind:
+
+    @tailwind base → estilos base (reset, normalização).
+
+    @tailwind components → componentes pré-estilizados (botões, formulários, etc).
+
+    @tailwind utilities → as classes utilitárias (como p-4, text-center, bg-blue-500).
+
+    💡 Esse arquivo já está sendo importado em app/layout.tsx.
+
+npm run dev
+
+
