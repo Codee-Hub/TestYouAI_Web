@@ -91,7 +91,7 @@ export default function MyTestPage() {
         <>  
           {test.map((test: Test, index: number) => (
             <div key={index} className="mb-8 p-4 border rounded-lg shadow">
-                {/* <h1 className="text-3xl font-bold mb-6">Tema {test.thema}</h1> */}
+                <h1 className="text-3xl font-bold mb-6">Tema {test.theme}</h1>
                 <h1 className="text-3xl font-bold mb-6">Teste nível {test.level}</h1>
                 <p className="mb-4 text-gray-600">Total de perguntas: {test.numberOfQuestions}</p>
             </div>
