@@ -86,8 +86,8 @@ export default function TestPage() {
       {loading && <p className="text-center">Carregando teste...</p>}
       {!loading && test && (
         <>
-          <h1 className="text-3xl font-bold mb-6">Teste nível {test.level}</h1>
-          <p className="mb-4 text-gray-600">Total de perguntas: {test.numberOfQuestions}</p>
+          <h1 className="text-3xl font-bold mb-6">Teste de nível {test.level}</h1>
+          <p className="mb-4 text-gray-600">Número de perguntas: {test.numberOfQuestions}</p>
 
           {test.questionList.map((question: Question, index: number) => (
             <div key={index} className="mb-8 p-4 border rounded-lg shadow">
