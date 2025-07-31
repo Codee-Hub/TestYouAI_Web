@@ -65,14 +65,20 @@ export default function TestPage() {
 
         <div>
           <label className="block font-medium mb-1">Dificuldade</label>
-          <input
-            type="text"
-            name="dificuldade"
-            value={params.dificuldade}
-            onChange={handleChange}
-            className="w-full border px-3 py-2 rounded"
-            required
-          />
+            <select
+              name="dificuldade"
+              value={params.dificuldade}
+              onChange={handleChange}
+              className="w-full border px-3 py-2 rounded"
+              required
+            >
+              <option value="">Selecione a dificuldade</option>
+              <option value="fácil">Fácil</option>
+              <option value="médio">Médio</option>
+              <option value="difícil">Difícil</option>
+              <option value="impossível">Impossível</option>
+              <option value="nível universitário">Nível Universitário</option>
+            </select>
         </div>
 
         <button
