@@ -17,8 +17,10 @@ export default function TestPage() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setParams(prev => ({
-      ...prev,
-      [name]: name === 'numberOfQuestions' ? parseInt(value) : value,
+        ...prev,
+        [name]: name === 'numberOfQuestions'
+        ? value === '' ? 0 : parseInt(value)
+        : value,
     }));
   };
 
