@@ -155,8 +155,8 @@ export default function TestPage() {
                         {
                           'bg-green-100 border-green-500': showResults && isCorrect,
                           'bg-red-100 border-red-500': showResults && isSelected && !isCorrect,
-                          'bg-gray-100': isSelected && !showResults,
-                          'hover:bg-gray-50': !showResults,
+                          'bg-gray-300 text-gray-900': isSelected && !showResults,
+                          'hover:bg-gray-200': !showResults,
                           'cursor-not-allowed': showResults,
                         }
                       )}
