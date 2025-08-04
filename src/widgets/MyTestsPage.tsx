@@ -45,7 +45,7 @@ export default function MyTestPage() {
           <label className="block font-medium mb-1">Tema</label>
           <input
             type="text"
-            name="tema"
+            name="theme"
             value={params.theme}
             onChange={handleChange}
             className="w-full border px-3 py-2 rounded"
@@ -57,7 +57,7 @@ export default function MyTestPage() {
           <label className="block font-medium mb-1">Número de Perguntas</label>
           <input
             type="number"
-            name="numeroDePerguntas"
+            name="numberOfQuestions"
             value={params.numberOfQuestions}
             onChange={handleChange}
             className="w-full border px-3 py-2 rounded"
@@ -70,7 +70,7 @@ export default function MyTestPage() {
           <label className="block font-medium mb-1">Dificuldade</label>
           <input
             type="text"
-            name="dificuldade"
+            name="level"
             value={params.level}
             onChange={handleChange}
             className="w-full border px-3 py-2 rounded"
