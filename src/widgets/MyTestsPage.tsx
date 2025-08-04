@@ -8,9 +8,9 @@ export default function MyTestPage() {
   const [test, setTest] = useState<Test [] | null>(null);
   const [loading, setLoading] = useState(false);
   const [params, setParams] = useState<TestParams>({
-    tema: '',
-    numeroDePerguntas: 5,
-    dificuldade: '',
+    theme: '',
+    numberOfQuestions: 5,
+    level: '',
   });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -18,7 +18,7 @@ export default function MyTestPage() {
 
     setParams(prev => ({
         ...prev,
-        [name]: name === 'numeroDePerguntas'
+        [name]: name === 'numberOfQuestions'
         ? value === '' ? 0 : parseInt(value)
         : value,
     }));
@@ -46,7 +46,7 @@ export default function MyTestPage() {
           <input
             type="text"
             name="tema"
-            value={params.tema}
+            value={params.theme}
             onChange={handleChange}
             className="w-full border px-3 py-2 rounded"
             required
@@ -58,7 +58,7 @@ export default function MyTestPage() {
           <input
             type="number"
             name="numeroDePerguntas"
-            value={params.numeroDePerguntas}
+            value={params.numberOfQuestions}
             onChange={handleChange}
             className="w-full border px-3 py-2 rounded"
             min={1}
@@ -71,7 +71,7 @@ export default function MyTestPage() {
           <input
             type="text"
             name="dificuldade"
-            value={params.dificuldade}
+            value={params.level}
             onChange={handleChange}
             className="w-full border px-3 py-2 rounded"
             required

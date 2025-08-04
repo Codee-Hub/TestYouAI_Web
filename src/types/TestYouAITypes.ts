@@ -2,12 +2,12 @@ export interface Test{
     theme:string
     level: string
     numberOfQuestions: number
+    wasAnswered: boolean
     questionList: Question[]
 }
 
 export interface Question {
     textQuestion: string
-    wasAnswered: boolean
     optionList: Option []
 }
 
@@ -19,7 +19,7 @@ export interface Option {
 }
 
 export type TestParams = {
-  tema: string;
-  numeroDePerguntas: number;
-  dificuldade: string;
+  theme: string;
+  numberOfQuestions: number;
+  level: string;
 };
