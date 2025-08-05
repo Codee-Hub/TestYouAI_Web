@@ -2,23 +2,34 @@
 
 import Image from "next/image"
 
+import {IconHome, IconUser} from "@/assets/icons"
+
 export function Header(){
     return (
         <header className="
                             flex 
-                            justify-center 
+                            justify-between
                             items-center 
-                            py-[20px]
-                            px-[20px] 
-                            border-b-[10px] 
+                            py-[15px]
+                            px-[50px] 
+                            border-b-[5px] 
                             border-[#ff5202] 
                             text-center
                         " >
+
+            <IconHome
+             size={70}
+            color="#ff5202"/> 
+
            <Image 
             src="/imgs/logo.png"
             alt="Logo Com Nome do TestYouAI"
             width={300}
             height={0} />
+
+            <IconUser
+            size={70}
+            color="#ff5202"/> 
         </header>
     )
 }
