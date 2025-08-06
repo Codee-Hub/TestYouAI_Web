@@ -17,8 +17,8 @@ export default function TestPage() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setParams(prev => ({
-        ...prev,
-        [name]: name === 'numberOfQuestions'
+      ...prev,
+      [name]: name === 'numberOfQuestions'
         ? value === '' ? 0 : parseInt(value)
         : value,
     }));
@@ -66,7 +66,7 @@ export default function TestPage() {
         ...question,
         optionList: question.optionList.map(option => ({
           ...option,
-          wasSelect: option.wasSelect, // já marcado
+          wasSelect: option.wasSelect,
         })),
       })),
     };
@@ -75,40 +75,42 @@ export default function TestPage() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 px-4">
-      <form onSubmit={handleSubmit} className="space-y-4 mb-8">
+    <div className="max-w-4xl mx-auto mt-10 px-4">
+      <form onSubmit={handleSubmit} className="space-y-6 mb-10 p-6 bg-white shadow-md rounded-lg border border-[#ff5202]">
+        <h1 className="text-4xl font-bold text-[#ff5202] mb-2 text-center">Gerar Novo Teste</h1>
+
         <div>
-          <label className="block font-medium mb-1">Tema</label>
+          <label className="block font-semibold mb-1 text-[#ff5202]">Tema</label>
           <input
             type="text"
             name="theme"
             value={params.theme}
             onChange={handleChange}
-            className="w-full border px-3 py-2 rounded"
+            className="w-full border border-[#ff5202] px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-[#ff5202]"
             required
           />
         </div>
 
         <div>
-          <label className="block font-medium mb-1">Número de Perguntas</label>
+          <label className="block font-semibold mb-1 text-[#ff5202]">Número de Perguntas</label>
           <input
             type="number"
             name="numberOfQuestions"
             value={params.numberOfQuestions}
             onChange={handleChange}
-            className="w-full border px-3 py-2 rounded"
+            className="w-full border border-[#ff5202] px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-[#ff5202]"
             min={1}
             required
           />
         </div>
 
         <div>
-          <label className="block font-medium mb-1">Dificuldade</label>
+          <label className="block font-semibold mb-1 text-[#ff5202]">Dificuldade</label>
           <select
             name="level"
             value={params.level}
             onChange={handleChange}
-            className="w-full border px-3 py-2 rounded"
+            className="w-full border border-[#ff5202] px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-[#ff5202]"
             required
           >
             <option value="">Selecione a dificuldade</option>
@@ -120,24 +122,38 @@ export default function TestPage() {
           </select>
         </div>
 
-        <button
+        <div className="text-center">
+        <button 
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+          className="text-xl font-semibold bg-[#ff5202] text-white px-6 py-3 rounded hover:bg-[#e04800] transition"
         >
           Gerar Teste
         </button>
+        </div>
       </form>
 
-      {loading && <p className="text-center">Carregando teste...</p>}
+      {loading && <p className="text-center font-bold text-[#ff5202] text-2xl">Carregando teste...</p>}
 
       {!loading && test && (
         <>
-          <h1 className="text-3xl font-bold mb-6">Teste de nível {test.level}</h1>
-          <p className="mb-4 text-gray-600">Número de perguntas: {test.numberOfQuestions}</p>
+
+          <div className="text-center">
+            <h1 className="text-4xl font-bold text-[#ff5202] mb-6"> Teste de  
+              <span className="text-gray-700 font-normal text-4xl "> {test.theme} </span>
+            </h1>
+            <div className='flex justify-around'>
+              <h2 className="text-2xl font-bold text-[#ff5202] mb-6">Nível :
+                              <span className="text-gray-700 font-normal text-2xl "> {test.level} </span>
+              </h2>
+              <p className="text-2xl font-bold text-[#ff5202] mb-6">Número de perguntas:
+                              <span className="text-gray-700 font-normal text-2xl "> {test.numberOfQuestions} </span>
+              </p>
+            </div>
+          </div>
 
           {test.questionList.map((question: Question, qIdx: number) => (
-            <div key={qIdx} className="mb-8 p-4 border rounded-lg shadow">
-              <h2 className="font-semibold mb-2">Pergunta {qIdx + 1}:</h2>
+            <div key={qIdx} className="mb-8 p-5 border border-[#ff5202] rounded-lg bg-white shadow-md">
+              <h2 className="font-semibold text-lg mb-2 text-[#ff5202]">Pergunta {qIdx + 1}:</h2>
               <p className="mb-3">{question.textQuestion}</p>
 
               <ul className="space-y-2">
@@ -155,15 +171,15 @@ export default function TestPage() {
                         {
                           'bg-green-100 border-green-500': showResults && isCorrect,
                           'bg-red-100 border-red-500': showResults && isSelected && !isCorrect,
-                          'bg-gray-300 text-gray-900': isSelected && !showResults,
-                          'hover:bg-gray-200': !showResults,
+                          'bg-orange-200 border-orange-400 text-black': isSelected && !showResults,
+                          'hover:bg-orange-100': !showResults,
                           'cursor-not-allowed': showResults,
                         }
                       )}
                     >
                       <div className="font-medium">{option.textOption}</div>
                       {showResults && (
-                        <p className="text-sm text-gray-600 mt-1">{option.justification}</p>
+                        <p className="text-sm text-gray-600 mt-1 italic">{option.justification}</p>
                       )}
                     </li>
                   );
@@ -172,15 +188,15 @@ export default function TestPage() {
             </div>
           ))}
 
-          <div className="text-center mt-8">
+          <div className="text-center my-8">
             <button
               onClick={handleSubmitAnswers}
               disabled={test.wasAnswered}
               className={classNames(
-                'px-6 py-3 text-white rounded transition',
+                'px-6 py-3 text-xl font-semibold text-white  rounded transition',
                 {
                   'bg-gray-400 cursor-not-allowed': test.wasAnswered,
-                  'bg-green-600 hover:bg-green-700': !test.wasAnswered,
+                  'bg-[#00a35c] hover:bg-green-700': !test.wasAnswered,
                 }
               )}
             >
