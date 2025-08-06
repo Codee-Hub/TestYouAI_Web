@@ -8,8 +8,8 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-orange-50">
       {/* Header + Conteúdo */}
+      <Header />
       <div className="flex-1 max-w-[1200px] mx-auto w-full">
-        <Header />
         <TestPage />
       </div>
 

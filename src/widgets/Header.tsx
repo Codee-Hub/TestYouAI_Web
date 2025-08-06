@@ -19,7 +19,8 @@ export function Header(){
 
             <IconHome
              size={70}
-            color="#ff5202"/> 
+            color="#ff5202"
+            className="hover:scale-110 transition-transform"/> 
 
            <Image 
             src="/imgs/logo.png"
@@ -29,7 +30,8 @@ export function Header(){
 
             <IconUser
             size={70}
-            color="#ff5202"/> 
+            color="#ff5202"
+            className="hover:scale-110 transition-transform"/> 
         </header>
     )
 }
