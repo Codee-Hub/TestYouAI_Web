@@ -2,51 +2,43 @@
 
 import { useEffect, useState } from "react";
 import { fetchUserById } from "@/service/TestYouAIAPI";
-import { LoginRequest, DecodedToken } from "@/types/TestYouAITypes";
+import { LoginRequest } from "@/types/TestYouAITypes";
 import { ToastContainer, toast } from "react-toastify";
-import { jwtDecode } from "jwt-decode"; // Import correto
+
+import { useAuth } from "@/utils/auth";
 
 export default function UserPage() {
   const [user, setUser] = useState<LoginRequest | null>(null);
+  const [loading, setLoading] = useState(true);
+  const { validateToken } = useAuth();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const decoded = validateToken();
+    if (!decoded) return;
 
-    if (!token) {
-      toast.error("Usuário não autenticado", { autoClose: 5000 });
-      return;
-    }
+    const userId = Number(decoded.sub);
+    const token = localStorage.getItem("token")!;
 
-    // Verifica se o token tem três partes (JWT válido)
-    if (token.split(".").length !== 3) {
-      toast.error("Token inválido", { autoClose: 5000 });
-      return;
-    }
-
-    // Decodifica o token
-    let decoded: DecodedToken;
-    try {
-      decoded = jwtDecode<DecodedToken>(token);
-    } catch (error) {
-      console.error("Erro ao decodificar token:", error);
-      toast.error("Token inválido", { autoClose: 5000 });
-      return;
-    }
-
-    const userId = decoded.sub;
-
-    // Busca os dados do usuário
-    fetchUserById(Number(userId), token)
+    fetchUserById(userId, token)
       .then((data) => setUser(data))
       .catch((err) => {
         console.error(err);
-        toast.error("Erro ao buscar os dados do usuário", { autoClose: 5000 });
-      });
-  }, []);
+        toast.error("Erro ao buscar os dados do usuário", {
+          autoClose: 5000,
+        });
+      })
+      .finally(() => setLoading(false));
+  }, [validateToken]);
 
-  if (!user) {
-    return <div>Carregando...</div>;
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <p>Carregando...</p>
+      </div>
+    );
   }
+
+  if (!user) return null;
 
   return (
     <div className="max-w-md mx-auto mt-16 px-6 py-8 bg-white shadow-md rounded-lg border border-[#ff5202]">
