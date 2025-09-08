@@ -19,10 +19,10 @@ export default function AuthForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isLogin) {
-      console.log('Login with:', { email: formData.email, password: formData.password });
+      console.log('Login com:', { email: formData.email, password: formData.password });
       // TODO: call login API
     } else {
-      console.log('Register with:', formData);
+      console.log('Cadastro com:', formData);
       // TODO: call register API
     }
   };
@@ -30,14 +30,14 @@ export default function AuthForm() {
   return (
     <div className="max-w-md mx-auto mt-16 px-6 py-8 bg-white shadow-md rounded-lg border border-[#ff5202]">
       <h1 className="text-3xl font-bold text-center text-[#ff5202] mb-6">
-        {isLogin ? 'Login' : 'Create Account'}
+        {isLogin ? 'Entrar' : 'Criar Conta'}
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-5">
         {!isLogin && (
           <>
             <div>
-              <label className="block font-semibold mb-1 text-[#ff5202]">Name</label>
+              <label className="block font-semibold mb-1 text-[#ff5202]">Nome</label>
               <input
                 type="text"
                 name="name"
@@ -49,7 +49,7 @@ export default function AuthForm() {
             </div>
 
             <div>
-              <label className="block font-semibold mb-1 text-[#ff5202]">Phone Number</label>
+              <label className="block font-semibold mb-1 text-[#ff5202]">Telefone</label>
               <input
                 type="text"
                 name="phoneNumber"
@@ -62,7 +62,7 @@ export default function AuthForm() {
         )}
 
         <div>
-          <label className="block font-semibold mb-1 text-[#ff5202]">Email</label>
+          <label className="block font-semibold mb-1 text-[#ff5202]">E-mail</label>
           <input
             type="email"
             name="email"
@@ -74,7 +74,7 @@ export default function AuthForm() {
         </div>
 
         <div>
-          <label className="block font-semibold mb-1 text-[#ff5202]">Password</label>
+          <label className="block font-semibold mb-1 text-[#ff5202]">Senha</label>
           <input
             type="password"
             name="password"
@@ -90,18 +90,18 @@ export default function AuthForm() {
             type="submit"
             className="w-full text-lg font-semibold bg-[#ff5202] text-white px-6 py-3 rounded hover:bg-[#e04800] transition"
           >
-            {isLogin ? 'Login' : 'Register'}
+            {isLogin ? 'Entrar' : 'Cadastrar'}
           </button>
         </div>
       </form>
 
       <p className="text-center text-gray-600 mt-6">
-        {isLogin ? "Don't have an account?" : "Already have an account?"}{' '}
+        {isLogin ? "Não tem uma conta?" : "Já possui uma conta?"}{' '}
         <span
           className="text-[#ff5202] font-semibold cursor-pointer hover:underline"
           onClick={() => setIsLogin(!isLogin)}
         >
-          {isLogin ? 'Sign up' : 'Login'}
+          {isLogin ? 'Cadastre-se' : 'Entrar'}
         </span>
       </p>
     </div>
