@@ -18,8 +18,21 @@ export interface Option {
     isCorrect: boolean
 }
 
-export type TestParams = {
+export interface TestParams  {
   theme: string;
   numberOfQuestions: number;
   level: string;
+};
+
+export interface LoginRequest   {
+  id: number;
+  name: string;
+  email: string;
+  password?: string; 
+  phoneNumber?: string;
+};
+
+export type LoginResponse = {
+  token: string;
+  expiresIn: number;
 };
