@@ -37,10 +37,17 @@ export type LoginResponse = {
   expiresIn: number;
 };
 
-export type ApiError = {
-  code?: number;      
-  message: string;     
-  field?: 'email' | 'password' | 'general';
+export type FieldError = {
+  field: string;       // ex: "name", "password"
+  message: string;     // mensagem amigável do backend
 };
+
+export type ApiError = {
+  code?: number;          
+  message: string;       
+  field?: 'email' | 'password' | 'general';
+  fieldWithErrors?: FieldError[]; // adicionamos aqui
+};
+
 
 

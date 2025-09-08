@@ -4,7 +4,7 @@ import { LoginResponse, LoginRequest, ApiError } from "@/types/TestYouAITypes";
 import { AxiosError } from "axios";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { login } from "@/service/TestYouAIAPI";
+import { login, registerUser } from "@/service/TestYouAIAPI";
 import { ToastContainer, toast } from "react-toastify";
 
 export default function AuthForm() {
@@ -53,8 +53,50 @@ export default function AuthForm() {
         }
       }
     } else {
-      console.log("Cadastro com:", formData);
-      toast.info("Cadastro ainda não implementado");
+      try {
+        const request: LoginRequest = {
+          name: formData.name!,
+          email: formData.email!,
+          password: formData.password!,
+          phoneNumber: formData.phoneNumber!,
+        };
+
+        await registerUser(request);
+
+        toast.success("Usuário cadastrado com sucesso!");
+
+        const loginResponse = await login({
+          email: request.email,
+          password: request.password,
+        });
+        localStorage.setItem("token", loginResponse.token);
+        router.push("/UserPage");
+      } catch (error: unknown) {
+        const err = error as AxiosError<ApiError>;
+        const responseData = err.response?.data;
+
+        toast.error(responseData?.message, { autoClose: 5000 });
+
+        if (responseData?.fieldWithErrors) {
+          toast.error(
+            <div>
+              {responseData.fieldWithErrors.map((fe) => (
+                <div key={fe.field}>
+                  <strong>{fe.field}:</strong> {fe.message}
+                </div>
+              ))}
+            </div>,
+            { autoClose: 5000 }
+          );
+          // toast.error(responseData.message);
+
+          // const allErrors = responseData.fieldWithErrors
+          //   .map((fe) => `${fe.field}: ${fe.message}`)
+          //   .join("\n");
+
+          // toast.error(allErrors, { autoClose: 5000 });
+        }
+      }
     }
   };
 
@@ -80,6 +122,8 @@ export default function AuthForm() {
                 onChange={handleChange}
                 className="w-full border border-[#ff5202] px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-[#ff5202]"
                 required={!isLogin}
+                minLength={3}
+                maxLength={20}
               />
             </div>
 
@@ -123,6 +167,8 @@ export default function AuthForm() {
             onChange={handleChange}
             className="w-full border border-[#ff5202] px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-[#ff5202]"
             required
+            minLength={3}
+            maxLength={20}
           />
         </div>
 
