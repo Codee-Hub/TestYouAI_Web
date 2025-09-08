@@ -38,9 +38,9 @@ export type LoginResponse = {
 };
 
 export type ApiError = {
-  code?: number;       // opcional, pode vir do backend
-  message: string;     // mensagem amigável
-  field?: 'email' | 'password' | 'general'; // campo relacionado ao erro
+  code?: number;      
+  message: string;     
+  field?: 'email' | 'password' | 'general';
 };
 
 

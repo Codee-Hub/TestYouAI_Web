@@ -15,3 +15,9 @@ export async function login(data: LoginRequest): Promise<LoginResponse> {
   const response = await axios.post<LoginResponse>(`${API_URL}/login`, data);
   return response.data;
 }
+
+export async function registerUser(data: LoginRequest): Promise<LoginResponse> {
+  const response = await axios.post(`${API_URL}/users`, data);
+  return response.data;
+}
+
