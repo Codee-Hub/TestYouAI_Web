@@ -48,7 +48,7 @@ export default function AuthForm() {
 
         // redirecionar
         router.push('/UserPage');
-      } catch (error: any) {
+      } catch (error:unknown) {
         setErrorMessage(error.message || 'Erro ao realizar login');
       }
     } else {
