@@ -25,9 +25,9 @@ export interface TestParams  {
 };
 
 export interface LoginRequest   {
-  id: number;
-  name: string;
-  email: string;
+  id?: number;
+  name?: string;
+  email?: string;
   password?: string; 
   phoneNumber?: string;
 };
@@ -36,3 +36,11 @@ export type LoginResponse = {
   token: string;
   expiresIn: number;
 };
+
+export type ApiError = {
+  code?: number;       // opcional, pode vir do backend
+  message: string;     // mensagem amigável
+  field?: 'email' | 'password' | 'general'; // campo relacionado ao erro
+};
+
+
