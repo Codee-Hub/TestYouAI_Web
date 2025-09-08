@@ -34,7 +34,7 @@ export default function AuthForm() {
 
         const response: LoginResponse = await login(request);
 
-        localStorage.setItem("token", response.token);
+        localStorage.setItem("token", response.accessToken);
 
         toast.success("Login realizado com sucesso!");
         router.push("/UserPage");
@@ -69,7 +69,7 @@ export default function AuthForm() {
           email: request.email,
           password: request.password,
         });
-        localStorage.setItem("token", loginResponse.token);
+        localStorage.setItem("token", loginResponse.accessToken);
         router.push("/UserPage");
       } catch (error: unknown) {
         const err = error as AxiosError<ApiError>;

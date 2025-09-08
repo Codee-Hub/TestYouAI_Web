@@ -33,7 +33,7 @@ export interface LoginRequest   {
 };
 
 export type LoginResponse = {
-  token: string;
+  accessToken: string;
   expiresIn: number;
 };
 
@@ -49,5 +49,12 @@ export type ApiError = {
   fieldWithErrors?: FieldError[]; // adicionamos aqui
 };
 
+export interface DecodedToken {
+  sub: string;   
+  scope: string; 
+  exp: number;   
+  iat: number;   
+  iss?: string;   
+};
 
 

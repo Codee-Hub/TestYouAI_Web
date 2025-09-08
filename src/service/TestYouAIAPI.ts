@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Test, TestParams, LoginRequest, LoginResponse } from '@/types/TestYouAITypes'; 
 
+
 const API_URL = 'http://localhost:8080';
 
 
@@ -20,4 +21,14 @@ export async function registerUser(data: LoginRequest): Promise<LoginResponse> {
   const response = await axios.post(`${API_URL}/users`, data);
   return response.data;
 }
+
+export async function fetchUserById(userId: number, token: string): Promise<LoginRequest> {
+  const response = await axios.get<LoginRequest>(`${API_URL}/users/${userId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+}
+
 
