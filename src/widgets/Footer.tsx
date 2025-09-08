@@ -39,18 +39,6 @@ export function Footer() {
                         </div>
                     </div>
 
-                    {/* Brian
-                    <div className="flex flex-col items-center">
-                        <span className="font-semibold">Brian Schultz</span>
-                        <div className="flex gap-4 mt-1">
-                            <Link href="https://github.com/BrianSchultz1" target="_blank">
-                                <IconBrandGithub size={35} className="hover:scale-110 transition-transform" />
-                            </Link>
-                            <Link href="https://www.linkedin.com/in/brian-schultz-/" target="_blank">
-                                <IconBrandLinkedin size={35} className="hover:scale-110 transition-transform" />
-                            </Link>
-                        </div>
-                    </div> */}
                 </div>
 
                 <p className="text-sm text-gray-600 mt-2">
