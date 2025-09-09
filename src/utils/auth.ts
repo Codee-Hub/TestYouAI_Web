@@ -18,13 +18,13 @@ export function useAuth() {
 
     if (!token) {
       toast.error("Usuário não autenticado", { autoClose: 5000 });
-      router.replace("/login");
+      router.replace("/AuthPage");
       return null;
     }
 
     if (token.split(".").length !== 3) {
       toast.error("Token inválido", { autoClose: 5000 });
-      router.replace("/login");
+      router.replace("/AuthPage");
       return null;
     }
 
@@ -34,7 +34,7 @@ export function useAuth() {
     } catch (error) {
       console.error("Erro ao decodificar token:", error);
       toast.error("Token inválido", { autoClose: 5000 });
-      router.replace("/login");
+      router.replace("/AuthPage");
       return null;
     }
   }, [getToken, router]);

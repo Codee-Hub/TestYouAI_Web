@@ -1,13 +1,15 @@
-'use client'
+"use client";
 
-import Image from "next/image"
+import Image from "next/image";
 
-import {IconHome, IconUser} from "@/assets/icons"
-import Link from "next/link"
+import { IconHome } from "@/assets/icons";
+import Link from "next/link";
+import { UserIcon } from "@/components/UserIcon";
 
-export function Header(){
-    return (
-        <header className="
+export function Header() {
+  return (
+    <header
+      className="
                             flex 
                             justify-between
                             items-center 
@@ -16,8 +18,8 @@ export function Header(){
                             border-b-[5px] 
                             border-[#ff5202] 
                             text-center
-                        " >
-
+                        "
+    >
       {/* Home button */}
       <Link href="/" className="hover:scale-110 transition-transform">
         <IconHome size={70} color="#ff5202" />
@@ -32,9 +34,7 @@ export function Header(){
       />
 
       {/* Auth button */}
-      <Link href="/AuthPage" className="hover:scale-110 transition-transform">
-        <IconUser size={70} color="#ff5202" />
-      </Link>
-        </header>
-    )
+      <UserIcon />
+    </header>
+  );
 }
