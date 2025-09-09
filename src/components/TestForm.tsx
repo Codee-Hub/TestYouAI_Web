@@ -41,15 +41,6 @@ export default function TestForm({ onTestGenerated }: TestFormProps) {
   //   }, []);
 
   // 🔑 Preenche userId do token válido
-  useEffect(() => {
-    const decoded = validateToken();
-    if (decoded?.sub) {
-      setParams((prev) => ({
-        ...prev,
-        userId: Number(decoded.sub),
-      }));
-    }
-  }, [validateToken]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -66,15 +57,45 @@ export default function TestForm({ onTestGenerated }: TestFormProps) {
     }));
   };
 
+  //   const handleSubmit = async (e: React.FormEvent) => {
+  //     e.preventDefault();
+  //     setLoading(true);
+  //     try {
+  //       const decoded = validateToken();
+  //       if (decoded?.sub) {
+  //         setParams((prev) => ({
+  //           ...prev,
+  //           userId: Number(decoded.sub),
+  //         }));
+  //       }
+  //       console.log(params);
+  //       const response = await fetchTest(params);
+
+  //       if (onTestGenerated) {
+  //         onTestGenerated(response);
+  //       }
+  //     } catch (error) {
+  //       console.error("Erro ao buscar teste:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    try {
-      const response = await fetchTest(params);
 
-      if (onTestGenerated) {
-        onTestGenerated(response);
-      }
+    try {
+      const decoded = validateToken();
+      const finalParams = {
+        ...params,
+        userId: decoded?.sub ? Number(decoded.sub) : undefined,
+      };
+
+      console.log(finalParams);
+      const response = await fetchTest(finalParams);
+
+      onTestGenerated?.(response);
     } catch (error) {
       console.error("Erro ao buscar teste:", error);
     } finally {

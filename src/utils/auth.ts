@@ -2,15 +2,18 @@
 
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import { jwtDecode } from "jwt-decode";
 import { DecodedToken } from "@/types/TestYouAITypes";
+import { useCallback } from "react";
+import { jwtDecode } from "jwt-decode"; 
 
 export function useAuth() {
   const router = useRouter();
 
-  const getToken = (): string | null => localStorage.getItem("token");
+  const getToken = useCallback((): string | null => {
+    return localStorage.getItem("token");
+  }, []);
 
-  const validateToken = (): DecodedToken | null => {
+  const validateToken = useCallback((): DecodedToken | null => {
     const token = getToken();
 
     if (!token) {
@@ -34,7 +37,7 @@ export function useAuth() {
       router.replace("/login");
       return null;
     }
-  };
+  }, [getToken, router]);
 
   return { getToken, validateToken };
 }
