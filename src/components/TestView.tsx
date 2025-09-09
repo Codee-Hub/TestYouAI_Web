@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Test, Question, Option } from "@/types/TestYouAITypes";
 import classNames from "classnames";
 
@@ -10,6 +10,10 @@ type TestViewProps = {
 
 export default function TestView({ test: initialTest }: TestViewProps) {
   const [test, setTest] = useState<Test>(initialTest);
+
+  useEffect(() => {
+    setTest(initialTest);
+  }, [initialTest]);
 
   const handleSelectOption = (questionIndex: number, optionIndex: number) => {
     if (test.wasAnswered) return;
@@ -30,11 +34,10 @@ export default function TestView({ test: initialTest }: TestViewProps) {
   };
 
   const handleSubmitAnswers = () => {
-    const correctedTest = {
-      ...test,
+    setTest((prev) => ({
+      ...prev,
       wasAnswered: true,
-    };
-    setTest(correctedTest);
+    }));
   };
 
   return (
