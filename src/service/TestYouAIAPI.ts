@@ -38,4 +38,11 @@ export async function fetchUserById(userId: number, token: string): Promise<Logi
   return response.data;
 }
 
+export async function updateUser(userId: number, data: LoginRequest, token: string): Promise<LoginRequest> {
+  const response = await axios.put<LoginRequest>(`${API_URL}/users/${userId}`, data, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response.data;
+}
+
 
