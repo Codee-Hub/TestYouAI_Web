@@ -39,15 +39,15 @@ export type LoginResponse = {
 };
 
 export type FieldError = {
-  field: string;       // ex: "name", "password"
-  message: string;     // mensagem amigável do backend
+  field: string;       
+  message: string;     
 };
 
 export type ApiError = {
   code?: number;          
   message: string;       
   field?: 'email' | 'password' | 'general';
-  fieldWithErrors?: FieldError[]; // adicionamos aqui
+  fieldWithErrors?: FieldError[]; 
 };
 
 export interface DecodedToken {

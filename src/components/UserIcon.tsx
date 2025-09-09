@@ -79,41 +79,85 @@ export function UserIcon() {
         <IconUser size={70} color="#ff5202" />
       </button>
 
-      {showPopup && user && (
-        <div className="absolute right-0 mt-2 w-72 bg-white shadow-lg rounded-lg p-4 z-50">
-          <input
-            type="text"
-            name="name"
-            value={user.name || ""}
-            onChange={(e) => setUser({ ...user, name: e.target.value })}
-          />
-          <input
-            type="email"
-            name="email"
-            value={user.email || ""}
-            onChange={(e) => setUser({ ...user, email: e.target.value })}
-          />
-          <input
-            type="text"
-            name="phoneNumber"
-            value={user.phoneNumber || ""}
-            onChange={(e) => setUser({ ...user, phoneNumber: e.target.value })}
-          />
+      {showPopup && (
+        <div className="absolute right-0 mt-2 w-80 bg-white shadow-lg rounded-lg p-6 border border-[#ff5202] z-50">
+          {loading ? (
+            <div className="flex justify-center items-center h-32">
+              <p className="text-gray-500">Carregando...</p>
+            </div>
+          ) : (
+            user && (
+              <>
+                <h3 className="text-xl font-bold text-center text-[#ff5202] mb-4">
+                  Atualizar Usuário
+                </h3>
 
-          <div className="flex justify-between mt-2">
-            <button
-              onClick={handleUpdate}
-              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-            >
-              Update
-            </button>
-            <button
-              onClick={handleLogout}
-              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-            >
-              Log Out
-            </button>
-          </div>
+                {/* Nome */}
+                <div className="mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Nome
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={user.name || ""}
+                    onChange={(e) => setUser({ ...user, name: e.target.value })}
+                    placeholder="Nome"
+                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#ff5202] focus:outline-none"
+                  />
+                </div>
+
+                {/* Email */}
+                <div className="mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={user.email || ""}
+                    onChange={(e) =>
+                      setUser({ ...user, email: e.target.value })
+                    }
+                    placeholder="Email"
+                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#ff5202] focus:outline-none"
+                  />
+                </div>
+
+                {/* Telefone */}
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Telefone
+                  </label>
+                  <input
+                    type="text"
+                    name="phoneNumber"
+                    value={user.phoneNumber || ""}
+                    onChange={(e) =>
+                      setUser({ ...user, phoneNumber: e.target.value })
+                    }
+                    placeholder="Telefone"
+                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#ff5202] focus:outline-none"
+                  />
+                </div>
+
+                <div className="flex justify-between gap-2">
+                  <button
+                    onClick={handleUpdate}
+                    className="flex-1 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors"
+                  >
+                    Update
+                  </button>
+                  <button
+                    onClick={handleLogout}
+                    className="flex-1 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors"
+                  >
+                    Log Out
+                  </button>
+                </div>
+              </>
+            )
+          )}
         </div>
       )}
     </div>
