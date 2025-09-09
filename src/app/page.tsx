@@ -1,3 +1,5 @@
+"use client";
+
 import { Header } from "@/widgets/Header";
 import { Footer } from "@/widgets/Footer";
 import TestPage from "@/widgets/TestPage";
