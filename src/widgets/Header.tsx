@@ -1,10 +1,8 @@
 "use client";
 
 import Image from "next/image";
-
-import { IconHome } from "@/assets/icons";
-import Link from "next/link";
 import { UserIcon } from "@/components/UserIcon";
+import { HomeIcon } from "@/components/HomeIcon";
 
 export function Header() {
   return (
@@ -21,9 +19,7 @@ export function Header() {
                         "
     >
       {/* Home button */}
-      <Link href="/" className="hover:scale-110 transition-transform">
-        <IconHome size={70} color="#ff5202" />
-      </Link>
+      <HomeIcon />
 
       {/* Logo */}
       <Image
