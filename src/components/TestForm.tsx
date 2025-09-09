@@ -1,14 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { fetchTest } from "../service/TestYouAIAPI";
 import { Test, TestParams } from "@/types/TestYouAITypes";
+import { useAuth } from "@/utils/auth";
 
 type TestFormProps = {
-  onTestGenerated: (test: Test) => void;
+  onTestGenerated?: (test: Test) => void;
 };
 
 export default function TestForm({ onTestGenerated }: TestFormProps) {
+  const { validateToken } = useAuth();
   const [loading, setLoading] = useState(false);
   const [params, setParams] = useState<TestParams>({
     theme: "",
@@ -16,6 +18,38 @@ export default function TestForm({ onTestGenerated }: TestFormProps) {
     level: "",
     userId: undefined,
   });
+
+  //   // 🔑 Buscar userId do token no localStorage
+  //   useEffect(() => {
+  //     const token = localStorage.getItem("token");
+  //     if (token) {
+  //       try {
+  //         const payloadBase64 = token.split(".")[1]; // pega a parte payload do JWT
+  //         const decoded: DecodedToken = JSON.parse(atob(payloadBase64));
+
+  //         // no seu backend o `sub` é o id do usuário
+  //         if (decoded?.sub) {
+  //           setParams((prev) => ({
+  //             ...prev,
+  //             userId: Number(decoded.sub),
+  //           }));
+  //         }
+  //       } catch (err) {
+  //         console.error("Erro ao decodificar token:", err);
+  //       }
+  //     }
+  //   }, []);
+
+  // 🔑 Preenche userId do token válido
+  useEffect(() => {
+    const decoded = validateToken();
+    if (decoded?.sub) {
+      setParams((prev) => ({
+        ...prev,
+        userId: Number(decoded.sub),
+      }));
+    }
+  }, [validateToken]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -37,7 +71,10 @@ export default function TestForm({ onTestGenerated }: TestFormProps) {
     setLoading(true);
     try {
       const response = await fetchTest(params);
-      onTestGenerated(response); // devolve o teste para o pai
+
+      if (onTestGenerated) {
+        onTestGenerated(response);
+      }
     } catch (error) {
       console.error("Erro ao buscar teste:", error);
     } finally {
