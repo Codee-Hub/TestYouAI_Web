@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { fetchUserById } from "@/service/TestYouAIAPI";
 import { LoginRequest } from "@/types/TestYouAITypes";
 import { ToastContainer, toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 import { useAuth } from "@/utils/auth";
 
@@ -11,6 +12,7 @@ export default function UserPage() {
   const [user, setUser] = useState<LoginRequest | null>(null);
   const [loading, setLoading] = useState(true);
   const { validateToken } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
     const decoded = validateToken();
@@ -26,9 +28,10 @@ export default function UserPage() {
         toast.error("Erro ao buscar os dados do usuário", {
           autoClose: 5000,
         });
+        router.replace("/AuthPage"); // redireciona para login
       })
       .finally(() => setLoading(false));
-  }, [validateToken]);
+  }, [validateToken, router]);
 
   if (loading) {
     return (
