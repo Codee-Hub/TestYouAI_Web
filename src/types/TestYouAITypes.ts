@@ -22,6 +22,7 @@ export interface TestParams  {
   theme: string;
   numberOfQuestions: number;
   level: string;
+  userId? :number
 };
 
 export interface LoginRequest   {

@@ -5,10 +5,17 @@ import { Test, TestParams, LoginRequest, LoginResponse } from '@/types/TestYouAI
 const API_URL = 'http://localhost:8080';
 
 
-export async function fetchTest(params : TestParams): Promise<Test> {
-  const response = await axios.get<Test>(API_URL + '/tests', {
-    params,
-  });
+// export async function fetchTest(params : TestParams): Promise<Test> {
+//   const response = await axios.get<Test>(API_URL + '/tests', {
+//     params,
+//   });
+//   return response.data;
+// }
+
+export async function fetchTest(params: TestParams): Promise<Test> {
+
+  const response = await axios.post<Test>(`${API_URL}/tests`, params);
+
   return response.data;
 }
 
