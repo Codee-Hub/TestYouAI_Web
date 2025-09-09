@@ -19,7 +19,7 @@ export default function UserPage() {
 
   useEffect(() => {
     const decoded = validateToken();
-    if (!decoded) return;
+    if (!decoded) return; // já redireciona no validateToken
 
     const userId = Number(decoded.sub);
     const token = localStorage.getItem("token")!;
@@ -27,11 +27,15 @@ export default function UserPage() {
     fetchUserById(userId, token)
       .then((data) => setUser(data))
       .catch((err) => {
-        console.error(err);
-        toast.error("Erro ao buscar os dados do usuário", {
-          autoClose: 5000,
-        });
-        router.replace("/AuthPage");
+        if (err.response?.status === 401) {
+          toast.error("Não autorizado. Faça login.", { autoClose: 5000 });
+          router.replace("/AuthPage");
+        } else {
+          console.error(err);
+          toast.error("Erro ao buscar os dados do usuário", {
+            autoClose: 5000,
+          });
+        }
       })
       .finally(() => setLoading(false));
   }, [validateToken, router]);
