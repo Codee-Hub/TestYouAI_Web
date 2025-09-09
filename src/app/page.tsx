@@ -1,7 +1,6 @@
-import MyTestPage from "@/widgets/MyTestsPage";
 import { Header } from "@/widgets/Header";
 import { Footer } from "@/widgets/Footer";
-import FormTest from "@/widgets/FormTest";
+import TestPage from "@/widgets/TestPage";
 
 export default function Home() {
   return (
@@ -9,7 +8,7 @@ export default function Home() {
       {/* Header + Conteúdo */}
       <Header />
       <div className="flex-1 max-w-[1200px] mx-auto w-full">
-        <FormTest />
+        <TestPage />
       </div>
 
       {/* Footer */}
