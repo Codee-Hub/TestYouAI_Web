@@ -21,7 +21,7 @@ export default function UserTests() {
       .then((data) => setTests(data))
       .catch((err) => console.error("Erro ao buscar testes:", err))
       .finally(() => setLoading(false));
-  }, [validateToken, tests]);
+  }, [validateToken]);
 
   if (loading) {
     return (
@@ -44,28 +44,36 @@ export default function UserTests() {
       {tests.map((test, index) => (
         <div
           key={index}
-          className={`p-4 rounded-lg shadow-md border ${
+          className={`flex items-center justify-between p-4 rounded-lg shadow-md border transition-transform transform hover:scale-[1.02] hover:shadow-lg cursor-pointer ${
             test.wasAnswered
               ? "bg-green-100 border-green-500"
               : "bg-white border-[#ff5202]"
           }`}
         >
-          <h3 className="text-lg font-semibold text-[#ff5202] mb-2">
+          {/* Tema */}
+          <h3 className="text-lg font-bold text-[#ff5202] w-1/4 truncate">
             {test.theme}
           </h3>
-          <p className="text-gray-700">
-            <span className="font-medium">Nível:</span> {test.level}
+
+          {/* Nível */}
+          <p className="text-gray-700 w-1/4 text-center">
+            <span className="font-bold text-[#ff5202]">Nível:</span>{" "}
+            {test.level}
           </p>
-          <p className="text-gray-700">
-            <span className="font-medium">Questões:</span>{" "}
+
+          {/* Questões */}
+          <p className="text-gray-700 w-1/4 text-center">
+            <span className="font-bold text-[#ff5202]">Questões:</span>{" "}
             {test.numberOfQuestions}
           </p>
+
+          {/* Status */}
           <p
-            className={`mt-2 font-semibold ${
+            className={`w-1/4 text-center font-semibold ${
               test.wasAnswered ? "text-green-700" : "text-gray-500"
             }`}
           >
-            {test.wasAnswered ? "✅ Já Respondido" : "⏳ Não Respondido"}
+            {test.wasAnswered ? "✅ Respondido" : "⏳ Pendente"}
           </p>
         </div>
       ))}
