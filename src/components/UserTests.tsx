@@ -22,7 +22,9 @@ export default function UserTests({ tests, setTests }: UserTestsProps) {
     if (!decoded) return;
 
     fetchTestsByUser(token)
-      .then((data) => setTests(data))
+      .then((data) => {
+        setTests(data.reverse());
+      })
       .catch((err) => console.error("Erro ao buscar testes:", err))
       .finally(() => setLoading(false));
   }, [validateToken, setTests]);
