@@ -62,7 +62,7 @@ export default function TestForm({ onTestGenerated }: TestFormProps) {
       className="space-y-6 mb-10 p-6 bg-white shadow-md rounded-lg border border-[#ff5202]"
     >
       <h2 className="text-2xl font-bold text-center text-[#ff5202] mb-4">
-        Gerar Teste
+        Passe as informações para o TestYouIA criar seu teste !
       </h2>
 
       {/* Tema */}
@@ -77,6 +77,8 @@ export default function TestForm({ onTestGenerated }: TestFormProps) {
           onChange={handleChange}
           placeholder="Ex: Matemática, História..."
           className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#ff5202] focus:outline-none"
+          required
+          minLength={3}
         />
       </div>
 
@@ -89,10 +91,11 @@ export default function TestForm({ onTestGenerated }: TestFormProps) {
           type="number"
           name="numberOfQuestions"
           min="1"
-          max="50"
+          max="10"
           value={params.numberOfQuestions}
           onChange={handleChange}
           className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#ff5202] focus:outline-none"
+          required
         />
       </div>
 
@@ -106,11 +109,12 @@ export default function TestForm({ onTestGenerated }: TestFormProps) {
           value={params.level}
           onChange={handleChange}
           className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#ff5202] focus:outline-none"
+          required
         >
           <option value="">Selecione um nível</option>
-          <option value="easy">Fácil</option>
-          <option value="medium">Médio</option>
-          <option value="hard">Difícil</option>
+          <option value="Fácil">Fácil</option>
+          <option value="Médio">Médio</option>
+          <option value="Difícil">Difícil</option>
         </select>
       </div>
 
