@@ -67,7 +67,7 @@ export default function TestForm({ onTestGenerated }: TestFormProps) {
 
       {/* Tema */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-bold text-[#ff5202] mb-1">
           Tema
         </label>
         <input
@@ -82,7 +82,7 @@ export default function TestForm({ onTestGenerated }: TestFormProps) {
 
       {/* Número de questões */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-bold text-[#ff5202] mb-1">
           Número de Questões
         </label>
         <input
@@ -98,7 +98,7 @@ export default function TestForm({ onTestGenerated }: TestFormProps) {
 
       {/* Nível */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-bold text-[#ff5202] mb-1">
           Nível
         </label>
         <select
