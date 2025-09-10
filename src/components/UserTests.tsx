@@ -5,9 +5,13 @@ import { fetchTestsByUser } from "@/service/TestYouAIAPI";
 import { Test } from "@/types/TestYouAITypes";
 import { useAuth } from "@/utils/auth";
 
-export default function UserTests() {
+type UserTestsProps = {
+  tests: Test[];
+  setTests: React.Dispatch<React.SetStateAction<Test[]>>;
+};
+
+export default function UserTests({ tests, setTests }: UserTestsProps) {
   const { validateToken } = useAuth();
-  const [tests, setTests] = useState<Test[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -21,7 +25,7 @@ export default function UserTests() {
       .then((data) => setTests(data))
       .catch((err) => console.error("Erro ao buscar testes:", err))
       .finally(() => setLoading(false));
-  }, [validateToken]);
+  }, [validateToken, setTests]);
 
   if (loading) {
     return (

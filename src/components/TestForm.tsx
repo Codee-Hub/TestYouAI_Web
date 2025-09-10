@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { fetchTest } from "../service/TestYouAIAPI";
 import { Test, TestParams } from "@/types/TestYouAITypes";
 import { useAuth } from "@/utils/auth";
