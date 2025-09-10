@@ -55,5 +55,13 @@ export async function fetchTestById(id: number, token: string): Promise<Test> {
 }
 
 
+export async function updateTest(id: number,test: Test, token: string): Promise<Test> {
+  const response = await axios.put(`${API_URL}/tests/${id}`, test, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+}
 
 

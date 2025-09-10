@@ -10,7 +10,7 @@ type TestFormProps = {
 };
 
 export default function TestForm({ onTestGenerated }: TestFormProps) {
-  const { validateToken } = useAuth();
+  const { validate } = useAuth();
   const [loading, setLoading] = useState(false);
   const [params, setParams] = useState<TestParams>({
     theme: "",
@@ -39,7 +39,7 @@ export default function TestForm({ onTestGenerated }: TestFormProps) {
     setLoading(true);
 
     try {
-      const decoded = validateToken();
+      const decoded = validate();
       const finalParams = {
         ...params,
         userId: decoded?.sub ? Number(decoded.sub) : undefined,

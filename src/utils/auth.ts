@@ -39,5 +39,25 @@ export function useAuth() {
     }
   }, [getToken, router]);
 
-  return { getToken, validateToken };
+  const validate = useCallback((): DecodedToken | null => {
+    const token = getToken();
+
+    if (!token) {
+      return null;
+    }
+
+    if (token.split(".").length !== 3) {
+      return null;
+    }
+
+    try {
+      const decoded = jwtDecode<DecodedToken>(token);
+      return decoded;
+    } catch (error) {
+      console.error("Erro ao decodificar token:", error);
+      return null;
+    }
+  }, [getToken]);
+
+  return { getToken, validateToken, validate };
 }

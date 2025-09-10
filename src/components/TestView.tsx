@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { Test, Question, Option } from "@/types/TestYouAITypes";
 import classNames from "classnames";
+import { updateTest } from "@/service/TestYouAIAPI";
+import { useAuth } from "@/utils/auth";
 
 type TestViewProps = {
   test: Test;
@@ -10,6 +12,8 @@ type TestViewProps = {
 
 export default function TestView({ test: initialTest }: TestViewProps) {
   const [test, setTest] = useState<Test>(initialTest);
+  const [loading, setLoading] = useState(false);
+  const { validate } = useAuth();
 
   useEffect(() => {
     setTest(initialTest);
@@ -33,11 +37,31 @@ export default function TestView({ test: initialTest }: TestViewProps) {
     setTest({ ...test, questionList: updatedQuestions });
   };
 
-  const handleSubmitAnswers = () => {
-    setTest((prev) => ({
-      ...prev,
-      wasAnswered: true,
-    }));
+  const handleSubmitAnswers = async () => {
+    const updatedLocal = { ...test, wasAnswered: true };
+    setTest(updatedLocal);
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.log("Usuário não logado → só corrigiu localmente.");
+      return;
+    }
+
+    const decoded = validate();
+    if (!decoded) {
+      console.log("Token inválido → só corrigiu localmente.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const updated = await updateTest(test.id, updatedLocal, token);
+      setTest(updated);
+    } catch (err) {
+      console.error("Erro ao salvar teste:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -117,16 +141,20 @@ export default function TestView({ test: initialTest }: TestViewProps) {
       <div className="text-center my-8">
         <button
           onClick={handleSubmitAnswers}
-          disabled={test.wasAnswered}
+          disabled={test.wasAnswered || loading}
           className={classNames(
             "px-6 py-3 text-xl font-semibold text-white rounded transition",
             {
-              "bg-gray-400 cursor-not-allowed": test.wasAnswered,
-              "bg-[#00a35c] hover:bg-green-700": !test.wasAnswered,
+              "bg-gray-400 cursor-not-allowed": test.wasAnswered || loading,
+              "bg-[#00a35c] hover:bg-green-700": !test.wasAnswered && !loading,
             }
           )}
         >
-          {test.wasAnswered ? "Teste Corrigido" : "Corrigir Teste"}
+          {loading
+            ? "Salvando..."
+            : test.wasAnswered
+            ? "Teste Corrigido"
+            : "Corrigir Teste"}
         </button>
       </div>
     </div>
