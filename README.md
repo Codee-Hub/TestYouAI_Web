@@ -1,36 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<p align="center">
+  <img src="https://github.com/Codee-Hub/TestYouAI_Web/blob/main/TestTouAI/Logo.png" alt="logo" width="600"/>
+</p>
 
-## Getting Started
+## 🤖 Descrição
 
-First, run the development server:
+TestYouAI é uma aplicação web que permite gerar testes personalizados usando Inteligência Artificial(GPT - OPEN AI).  
+O front-end foi desenvolvido com **Next.js**, **React** e **Tailwind CSS**, oferecendo uma interface interativa e responsiva.  
+
+Os usuários podem:
+
+- Acessar testes básicos sem autenticação.
+- Criar e responder testes completos após realizar login.
+- Visualizar testes já respondidos, com feedback imediato sobre as respostas corretas e justificativas.
+
+A aplicação consome uma **API RESTful** robusta, garantindo que todos os testes e dados do usuário sejam persistidos de forma segura e organizada.
+
+**URL da API:** [TestYouAI API RESTful](https://github.com/Codee-Hub/TestYouAI_APIRestful)
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+* Next.js (React)
+* TypeScript
+* TailwindCSS
+* Axios
+* React-Toastify
+* JWT para autenticação
+* Tabler Icons
+
+## ⚡ Scripts do Projeto
 
 ```bash
+# Iniciar ambiente de desenvolvimento
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📂 Estrutura de Páginas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Página de Autenticação 🔐**: Login e cadastro de usuários.
+- **Página Home 🏠**: Acessível a todos, exibe testes disponíveis.
+- **Página do Usuário 👤**: Necessita autenticação, mostra testes do usuário e histórico.
+- **Página de Teste 📝**: Exibe o teste gerado com perguntas e opções, permite responder e corrigir.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ✨ Funcionalidades
 
-## Learn More
+- Gerar testes com tema, nível e número de questões.
+- Responder testes e visualizar resultados.
+- Salvar testes respondidos para usuários autenticados.
+- Suporte a usuários não autenticados (teste local, sem salvar).
+- Interface **responsiva e moderna** com TailwindCSS.
 
-To learn more about Next.js, take a look at the following resources:
+## 🔗 API Consumida
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+A aplicação front-end consome uma **API RESTful** desenvolvida com **Spring Boot**, que inclui:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Integração com Spring AI**: utilização do **ChatGPT da OpenAI** para geração dinâmica de questões e respostas via json.
+- **Autenticação** via **JWT** e **OAuth2**, usando chave pública e privada.
+- **Segurança** com Spring Security, incluindo roles e proteção de endpoints.
+- **Endpoints de usuário**: criação de usuários, login, e gerenciamento de testes.
+- **Endpoints de testes**: criar, listar e responder testes.
+- **Documentação** com Swagger (springdoc-openapi).
+- **DTOs e Mappers** para transformação de dados entre entidades e modelos de API.
+- **Banco de dados**: suporte a PostgreSQL.
 
-## Deploy on Vercel
+> Todas as requisições autenticadas devem enviar o token JWT no header `Authorization: Bearer <token>`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**URL da API:** [TestYouAI API RESTful](https://github.com/Codee-Hub/TestYouAI_APIRestful)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🤝 Como Contribuir
+
+1. Clone o repositório.
+2. Instale as dependências: `npm install`
+3. Crie uma branch para sua feature: `git checkout -b minha-feature`
+4. Faça as alterações e commit: `git commit -m 'Descrição da feature'`
+5. Envie para o repositório: `git push origin minha-feature`
+6. Abra um Pull Request.
+
+---
+
+## 📸 Capturas de Tela
+
+### **Página de Autenticação 🔐**
+
+![Página de Autenticação](https://github.com/Codee-Hub/TestYouAI_Web/blob/main/TestTouAI/login.png)
+
+### **Página Home 🏠**
+
+![Página Home](https://github.com/Codee-Hub/TestYouAI_Web/blob/main/TestTouAI/home.png)
+
+### **Página do Usuário 👤**
+
+![Página do Usuário](https://github.com/Codee-Hub/TestYouAI_Web/blob/main/TestTouAI/userpage.png)
+
+### **Página de Teste 📝**
+
+![Página de Teste](https://github.com/Codee-Hub/TestYouAI_Web/blob/main/TestTouAI/testpage1.png)
+![Página de Teste](https://github.com/Codee-Hub/TestYouAI_Web/blob/main/TestTouAI/testpage2.png)
+
+---
+
+## 📝 Licença
+
+Este projeto está licenciado sob a **MIT License**.  
+Veja o arquivo [LICENSE](./LICENSE) para mais detalhes.
+
+---
+## 📬Contato
+
+Desenvolvido por Cauã Farias 💻
+Email: [cauafariasdev@gmail.com](mailto:cauafariasdev@gmail.com)
