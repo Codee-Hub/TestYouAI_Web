@@ -19,29 +19,6 @@ export default function TestForm({ onTestGenerated }: TestFormProps) {
     userId: undefined,
   });
 
-  //   // 🔑 Buscar userId do token no localStorage
-  //   useEffect(() => {
-  //     const token = localStorage.getItem("token");
-  //     if (token) {
-  //       try {
-  //         const payloadBase64 = token.split(".")[1]; // pega a parte payload do JWT
-  //         const decoded: DecodedToken = JSON.parse(atob(payloadBase64));
-
-  //         // no seu backend o `sub` é o id do usuário
-  //         if (decoded?.sub) {
-  //           setParams((prev) => ({
-  //             ...prev,
-  //             userId: Number(decoded.sub),
-  //           }));
-  //         }
-  //       } catch (err) {
-  //         console.error("Erro ao decodificar token:", err);
-  //       }
-  //     }
-  //   }, []);
-
-  // 🔑 Preenche userId do token válido
-
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -56,30 +33,6 @@ export default function TestForm({ onTestGenerated }: TestFormProps) {
           : value,
     }));
   };
-
-  //   const handleSubmit = async (e: React.FormEvent) => {
-  //     e.preventDefault();
-  //     setLoading(true);
-  //     try {
-  //       const decoded = validateToken();
-  //       if (decoded?.sub) {
-  //         setParams((prev) => ({
-  //           ...prev,
-  //           userId: Number(decoded.sub),
-  //         }));
-  //       }
-  //       console.log(params);
-  //       const response = await fetchTest(params);
-
-  //       if (onTestGenerated) {
-  //         onTestGenerated(response);
-  //       }
-  //     } catch (error) {
-  //       console.error("Erro ao buscar teste:", error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
