@@ -47,5 +47,13 @@ export async function fetchTestsByUser(token: string): Promise<Test[]> {
   return response.data;
 }
 
+export async function fetchTestById(id: number, token: string): Promise<Test> {
+  const response = await axios.get<Test>(`${API_URL}/tests/${id}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response.data;
+}
+
+
 
 
