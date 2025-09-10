@@ -41,7 +41,7 @@ export default function TestView({ test: initialTest }: TestViewProps) {
   };
 
   return (
-    <div>
+    <div className="my-10">
       <div className="text-center">
         <h1 className="text-4xl font-bold text-[#ff5202] mb-6">
           Teste de

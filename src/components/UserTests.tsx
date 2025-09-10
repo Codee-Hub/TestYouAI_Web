@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { fetchTestsByUser } from "@/service/TestYouAIAPI";
 import { Test } from "@/types/TestYouAITypes";
 import { useAuth } from "@/utils/auth";
+import { useRouter } from "next/navigation";
 
 type UserTestsProps = {
   tests: Test[];
@@ -13,6 +14,7 @@ type UserTestsProps = {
 export default function UserTests({ tests, setTests }: UserTestsProps) {
   const { validateToken } = useAuth();
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -50,6 +52,7 @@ export default function UserTests({ tests, setTests }: UserTestsProps) {
       {tests.map((test, index) => (
         <div
           key={index}
+          onClick={() => router.push(`/UserPage/${test.id}`)}
           className={`flex items-center justify-between p-4 rounded-lg shadow-md border transition-transform transform hover:scale-[1.02] hover:shadow-lg cursor-pointer ${
             test.wasAnswered
               ? "bg-green-100 border-green-500"
