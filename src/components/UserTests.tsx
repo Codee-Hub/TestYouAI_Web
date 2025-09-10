@@ -21,7 +21,7 @@ export default function UserTests() {
       .then((data) => setTests(data))
       .catch((err) => console.error("Erro ao buscar testes:", err))
       .finally(() => setLoading(false));
-  }, [validateToken]);
+  }, [validateToken, tests]);
 
   if (loading) {
     return (

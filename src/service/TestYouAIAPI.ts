@@ -39,7 +39,7 @@ export async function updateUser(userId: number, data: LoginRequest, token: stri
 
 
 export async function fetchTestsByUser(token: string): Promise<Test[]> {
-  const response = await axios.get<Test[]>(`${API_URL}/users`, {
+  const response = await axios.get<Test[]>(`${API_URL}/tests/users`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
